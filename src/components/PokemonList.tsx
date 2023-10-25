@@ -55,8 +55,9 @@ async function fetchEvolutions(pokemonUrl: string): Promise<string[]> {
 function PokemonList() {
   const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const limit = 20; // Display x amount of Pokemon
+  const [limit, setLimit] = useState(20); // Display x amount of Pokemon
   const baseUrl: string = 'https://pokeapi.co/api/v2/';
+
 
 
   useEffect(() => {
@@ -125,18 +126,23 @@ function PokemonList() {
       .catch((err) => {
         throw err;
       });
-  }, []);
+  }, [limit]);
+
+
+  //Function to load more pokemon
+
+  const loadMore = () => {
+    setLimit(limit + 20);
+  };
 
   if (loading) {
     return <div>Loading</div>;
   }
 
+
   return (
     <div>
-      hello
-      <Button variant="text">
-        Load More
-      </Button>
+      Pokemon List View
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -173,6 +179,9 @@ function PokemonList() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Button variant="text" onClick={loadMore}>
+        Load More
+      </Button>
     </div>
   );
 }
