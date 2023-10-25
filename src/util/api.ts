@@ -31,7 +31,7 @@ export const fetchPokemonEvolution = async (url: string) => {
   }
 };
 
-// Function to fetch Pokemon species data
+// Function to fetch Pokemon species data (for finding corresponding evolutions)
 export async function fetchPokemonSpeciesData(pokemonSpeciesUrl: string) {
   const response = await fetch(pokemonSpeciesUrl);
   if (!response.ok) {
@@ -40,12 +40,27 @@ export async function fetchPokemonSpeciesData(pokemonSpeciesUrl: string) {
   return response.json();
 };
 
+/*
 // Function to fetch evolution chain data
-export async function fetchPokemonEvolutionChain(evolutionChainId: number) {
-  const evolutionChainUrl = `https://pokeapi.co/api/v2/evolution-chain/${evolutionChainId}`;
+export async function fetchPokemonEvolutionChain(evolutionChain: number) {
+  const evolutionChainUrl = `https://pokeapi.co/api/v2/evolution-chain/${evolutionChain}`;
   const response = await fetch(evolutionChainUrl);
   if (!response.ok) {
     throw new Error(`Failed to fetch evolution chain data: ${response.status}`);
   }
   return response.json();
-};
+};*/
+
+
+//Function to fetch moves data
+async function fetchPokemonMoves(pokemonUrl: string): Promise<string[]> {
+  try {
+    const response = await fetch(pokemonUrl);
+    const data = await response.json();
+    const moves = data.moves.map((move: any) => move.move.name);
+    return moves;
+  } catch (error) {
+    console.error('Error fetching moves:', error);
+    return [];
+  }
+}
