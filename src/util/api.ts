@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {useEffect, useState} from 'react';
 
 const baseUrl: string = 'https://pokeapi.co/api/v2'; 
 
@@ -20,42 +21,31 @@ export const fetchPokemonDetails = async (url: string)=> {
     }
 };
 
-export const fetchPokemonEvolution = async (pokemonUrl: string) => {
-    try {
-      // Make a request to the evolution chain endpoint for the specific Pokémon
-      const response = await axios.get(`${pokemonUrl}/evolution-chain`);
-  
-      // Extract and return the evolution data
-      const evolutionData = response.data; // You may need to process this data
-  
-      return evolutionData;
-    } catch (err) {
-      throw err;
-    }
-  };
+export const fetchPokemonEvolution = async (url: string) => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
 
-  
-  export const processEvolutionData = (evolutionData:any) => {
-    // Check if there is an evolution chain
-    if (!evolutionData || !evolutionData.chain) {
-      return [];
-    }
-  
-    const evolvedForms:any = [];
-  
-    const processChain = (chain:any) => {
-      if (chain.species) {
-        evolvedForms.push(chain.species.name);
-      }
-      if (chain.evolves_to) {
-        chain.evolves_to.forEach((evolution:any) => {
-          processChain(evolution);
-        });
-      }
-    };
-  
-    processChain(evolutionData.chain);
-  
-    return evolvedForms;
-  };
+// Function to fetch Pokemon species data
+export async function fetchPokemonSpeciesData(pokemonSpeciesUrl: string) {
+  const response = await fetch(pokemonSpeciesUrl);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Pokemon species data: ${response.status}`);
+  }
+  return response.json();
+};
 
+// Function to fetch evolution chain data
+export async function fetchPokemonEvolutionChain(evolutionChainId: number) {
+  const evolutionChainUrl = `https://pokeapi.co/api/v2/evolution-chain/${evolutionChainId}`;
+  const response = await fetch(evolutionChainUrl);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch evolution chain data: ${response.status}`);
+  }
+  return response.json();
+};
