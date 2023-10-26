@@ -1,13 +1,11 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import '../styles/App.css';
-import PokemonList from './PokemonList';
+import PokemonData from './PokemonData';
+import PokemonContainer from './PokemonContainer';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom'
 
-function App() {
-  return <div>
-    <PokemonList/>
-  </div>
+export default function App() {
+  return(
+    <PokemonContainer/>
+  )
 }
-
-export default App

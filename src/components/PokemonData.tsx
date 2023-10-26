@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { fetchPokemonList, fetchPokemonDetails, fetchPokemonEvolution, fetchPokemonSpeciesData } from '../util/api';
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
-import Button from '@mui/material/Button';
 
 
 //Interfaz para el Objeto Pokemon
@@ -16,6 +14,12 @@ interface Pokemon {
   weight: number; 
   url: string;
 }
+
+export type PokemonDataResult = {
+  pokemonData: Pokemon[]; // Replace with the actual type of your Pokémon data
+  loading: boolean;
+  loadMore: () => void;
+};
 
 //Async Functions
 
@@ -49,10 +53,16 @@ async function fetchEvolutions(pokemonUrl: string): Promise<string[]> {
   return evolutionData; 
 }
 
+//Function to make the first letter of pokemon.name uppercase later
+function Uppercase(string:string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
-//Pokemon data
-function PokemonList() {
+//Pokemon data 
+function PokemonData():PokemonDataResult {
+
+  
   const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [limit, setLimit] = useState(20); // Display x amount of Pokemon
@@ -81,7 +91,7 @@ function PokemonList() {
 
           //Fetch moves with a new call to the API
           const moves = await fetchPokemonMoves(pokemon.url);
-          //Display only the first 3 moves 
+          //Display only the first 3 moves (to save space on table)
           let firstMoves = moves.slice(0,3);
 
           //Save Evolutions into an array
@@ -99,8 +109,8 @@ function PokemonList() {
           //return a pokemon object with the extracted data as attributes
 
           return {
-            name: pokemon.name,
-            picture: detailsData[index].sprites.front_default,
+            name: Uppercase(pokemon.name),
+            picture: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index+1}.png`,
             evolutions, 
             abilities, 
             types,
@@ -110,10 +120,7 @@ function PokemonList() {
           };
         });
 
-
-
-
-        // You can wait for all combined data promises to resolve and then set the state.
+        // Set state after all promises have been resolved
         Promise.all(combinedData)
           .then((resolvedData) => {
             setPokemonData(resolvedData);
@@ -135,55 +142,8 @@ function PokemonList() {
     setLimit(limit + 20);
   };
 
-  if (loading) {
-    return <div>Loading</div>;
-  }
 
-
-  return (
-    <div>
-      Pokemon List View
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Pokemon</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Evolutions</TableCell>
-              <TableCell>Types</TableCell>
-              <TableCell>Abilities</TableCell>
-              <TableCell>Moves</TableCell>
-              <TableCell>Height</TableCell>
-              <TableCell>Weight</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {pokemonData.map((pokemon) => (
-              <TableRow key={pokemon.name}>
-                <TableCell>
-                  <img src={pokemon.picture} alt={pokemon.name} style={{ width: '50px' }} />
-                </TableCell>
-                <TableCell>{pokemon.name}</TableCell>
-                <TableCell>
-                  {pokemon.evolutions.map((evolutions, index) => (
-                    <div key={index}>{evolutions}</div>
-                  ))}
-                </TableCell>
-                <TableCell>{pokemon.types.join(',')}</TableCell>
-                <TableCell>{pokemon.abilities.join(',')}</TableCell>
-                <TableCell>{pokemon.moves.join(',')}</TableCell>
-                <TableCell>{pokemon.height}cm</TableCell>
-                <TableCell>{pokemon.weight}gr</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Button variant="text" onClick={loadMore}>
-        Load More
-      </Button>
-    </div>
-  );
+  return {pokemonData, loading, loadMore}; //Return an object with the data, loading state, and load more functionality
 }
 
-export default PokemonList;
+export default PokemonData;
