@@ -1,12 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
+import {Form, InputGroup} from 'react-bootstrap'
+import SearchBox from './SearchBox';
+
+
 
 const ListView = (props:any) => {
 
-    const pokemonData = props.pokemonData
+    const { pokemonData } = props;
+    const searchTerm = props.searchTerm;
+
+    const [search, setSearch] = useState('');
+
 
     return (
-        <TableContainer component={Paper}>
+        <>
+
+        <TableContainer component={Paper} className="table">
             <Table>
                 <TableHead>
                     <TableRow>
@@ -20,7 +30,9 @@ const ListView = (props:any) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.pokemonData.map((pokemon:any) => (
+                    {props.pokemonData.filter((pokemon:any)=>{
+                        return searchTerm.toLowerCase() === '' ? pokemon : pokemon.name.toLowerCase().includes(searchTerm)
+                    }).map((pokemon:any) => (
                     <TableRow key={pokemon.name}>
                         <TableCell>
                         <img src={pokemon.picture} alt={pokemon.name} style={{ width: '100px' }} />
@@ -32,7 +44,6 @@ const ListView = (props:any) => {
                         ))}
                         </TableCell>
                         <TableCell>{pokemon.types.join(', ')}</TableCell>
-                        
                         <TableCell>{pokemon.moves.join(', ')}</TableCell>
                         <TableCell>{pokemon.height}cm</TableCell>
                         <TableCell>{pokemon.weight}gr</TableCell>
@@ -41,6 +52,7 @@ const ListView = (props:any) => {
                 </TableBody>
             </Table>
         </TableContainer>
+        </>
     )
 }
 

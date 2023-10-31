@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import '../styles/App.css';
-import PokemonData from './PokemonData';
+import '../styles/styles.scss';
+import PokemonData from '../hooks/PokemonData';
 import PokemonContainer from './PokemonContainer';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom'
+import Container from './Container';
 
 export default function App() {
   return(
-    <PokemonContainer/>
+    <Container/>
   )
 }

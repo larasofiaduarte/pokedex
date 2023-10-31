@@ -1,0 +1,56 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.card {
+  padding: 2em;
+}
+
+.center-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form{
+  display:flex;
+  justify-content:right;
+}
+
+.search{
+  height:3.5em;
+  width: 20em;
+  border-radius:25px;
+  padding:0px 10px;
+}
+
+.table{
+  margin-top:1em;
+  margin-bottom:1em;
+}
+
+.viewContainer{
+  display:flex;
+  justify-items: right;
+  justify-content: right;
+}
+
+.viewButton{
+  padding:0.5em 1.5em;
+  border-radius:25px;
+  background-color:#1a1a1a;
+  margin: 0em 0.5em;
+}
+
+.container{
+  display:flex;
+}
+
+.filters-btn{
+  height:3em;
+}

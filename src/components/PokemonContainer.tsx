@@ -1,14 +1,31 @@
-import React from 'react';
-import PokemonData, {PokemonDataResult} from './PokemonData';
+import React, {useState} from 'react';
+import PokemonData, {PokemonDataResult} from '../hooks/PokemonData';
 import ListView from './ListView';
 import GridView from './GridView';
-import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import '../styles/styles.scss';
+import SearchBox from './SearchBox';
 
+function PokemonContainer( {selectedTypes}:any ) {
+   // Fetch data and manage state
+  const {pokemonData, loading, loadMore}:PokemonDataResult = PokemonData();
+  const [searchTerm, setSearchTerm] = useState(''); 
 
-function PokemonContainer() {
-  const {pokemonData, loading, loadMore}:PokemonDataResult = PokemonData(); // Fetch data and manage state
+  //Stores search term into state
+  const handleSearch = (term:string) => {
+    setSearchTerm(term);
+  };
+
+  //Stores pokemon that match the selected types into an array
+  const filteredData = pokemonData.filter((pokemon) =>
+    selectedTypes.length === 0 || pokemon.types.some((type) => selectedTypes.includes(type))
+  );
+
+  console.log(selectedTypes.length);
+  console.log(selectedTypes.join(','));
+
+  console.log(filteredData);
 
   return (
     <div>
@@ -16,15 +33,17 @@ function PokemonContainer() {
             <CircularProgress/>
         ) : (
         <>
-            <Link to="/">List </Link>
-            <Link to="/grid">Grid</Link>
-
-            <Routes>
-                <Route path="/" element={<ListView pokemonData={pokemonData}/>}/>
-                <Route path="/grid" element={<GridView pokemonData={pokemonData}/>}/>
-            </Routes>
+          <SearchBox onSearch={handleSearch} />
+          <div className="viewContainer">
+            <Link className="viewButton" to="/">List </Link>
+            <Link className="viewButton" to="/grid">Grid</Link>
+          </div>
+          <Routes>
+            <Route path="/" element={<ListView pokemonData={filteredData} searchTerm={searchTerm}/>}/>
+            <Route path="/grid" element={<GridView pokemonData={pokemonData} searchTerm={searchTerm}/>}/>
+          </Routes>
             
-            <button onClick={loadMore}>Load More</button>
+          <button onClick={loadMore}>Load More</button>
             
         </>
       )}

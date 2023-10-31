@@ -4,8 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import React from 'react';
-import '../styles/MediaCard.css'; 
+import '../styles/styles.scss'; 
 
 interface MediaCardProps {
   img: string; 
@@ -16,8 +15,8 @@ interface MediaCardProps {
 
 export default function MediaCard({img, title, types}:MediaCardProps) {
     return (
-      <Card sx={{ maxWidth: 345, margin: 2}}>
-        <div className="center-card">
+      <Card sx={{ maxWidth: 345, margin: 2, padding:2}}>
+        <div>
           <CardMedia
           sx={{ height: 200, width: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           image={img}

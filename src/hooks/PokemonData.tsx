@@ -1,58 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { fetchPokemonList, fetchPokemonDetails, fetchPokemonEvolution, fetchPokemonSpeciesData } from '../util/api';
+import { fetchPokemonList, fetchPokemonDetails, fetchPokemonMoves, fetchEvolutionChainURL, fetchEvolutions, fetchPokemonColor} from '../util/api';
+import {Pokemon} from './Interfaces';
 
-
-//Interfaz para el Objeto Pokemon
-interface Pokemon {
-  name: string;
-  picture: string;
-  evolutions: any[]; 
-  types: string[];
-  abilities: string[];
-  moves: string[];
-  height: number; 
-  weight: number; 
-  url: string;
-}
 
 export type PokemonDataResult = {
-  pokemonData: Pokemon[]; // Replace with the actual type of your Pokémon data
+  pokemonData: Pokemon[];
   loading: boolean;
   loadMore: () => void;
 };
 
 //Async Functions
-
-//fetch moves data
-async function fetchPokemonMoves(pokemonUrl: string): Promise<string[]> {
-  try {
-    const response = await fetch(pokemonUrl);
-    const data = await response.json();
-    const moves = data.moves.map((move: any) => move.move.name);
-    return moves;
-  } catch (error) {
-    console.error('Error fetching moves:', error);
-    return [];
-  }
-}
-
-//fetch correct evolution-chain endpoint depending on species
-async function fetchEvolutionChainURL(pokemonSpeciesUrl: string): Promise<number> {
-  const speciesData = await fetchPokemonSpeciesData(pokemonSpeciesUrl);
-
-  // Get the evolution chain URL from the species data
-  const evolutionChainURL = speciesData.evolution_chain.url;
-
-  return evolutionChainURL;
-}
-
-//fetch evolutions
-async function fetchEvolutions(pokemonUrl: string): Promise<string[]> {
-  const evolutionData = await fetchPokemonEvolution(pokemonUrl);
-  // Extract the relevant data from the evolutionData object and return it as an array of strings.
-  return evolutionData; 
-}
-
 //Function to make the first letter of pokemon.name uppercase later
 function Uppercase(string:string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -65,7 +22,7 @@ function PokemonData():PokemonDataResult {
   
   const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [limit, setLimit] = useState(20); // Display x amount of Pokemon
+  const [limit, setLimit] = useState(100); // Display x amount of Pokemon
   const baseUrl: string = 'https://pokeapi.co/api/v2/';
 
 
@@ -78,19 +35,28 @@ function PokemonData():PokemonDataResult {
         const detailsData = await Promise.all(detailsPromises);
         const combinedData = data.results.map(async (pokemon: Pokemon, index: number) => {
 
+          //pokemon id
+          const id = detailsData[index].id;
 
-          // Fetch abilities and types for each Pokémon
+          //abilities
           const abilities = detailsData[index].abilities.map((abilityData: any) => abilityData.ability.name);
+          //types
           const types = detailsData[index].types.map((typeData: any) => typeData.type.name);
 
-          // Fetch the evolution chain URL for the current Pokemon
+          //Fetch the evolution chain URL for the current Pokemon
           const evolutionChainURL:any = await fetchEvolutionChainURL(detailsData[index].species.url);
 
-          //Fetch evolutions with a new call to the API
+
+          //Fetch evolutions 
           const evolution:any = await fetchEvolutions(evolutionChainURL);
 
-          //Fetch moves with a new call to the API
+          //Fetch color using species endpoint
+          const color:string = await fetchPokemonColor(`${baseUrl}pokemon-species/${id}/`);
+
+
+          //Fetch moves 
           const moves = await fetchPokemonMoves(pokemon.url);
+
           //Display only the first 3 moves (to save space on table)
           let firstMoves = moves.slice(0,3);
 
@@ -106,7 +72,9 @@ function PokemonData():PokemonDataResult {
             }
           }
 
-          //return a pokemon object with the extracted data as attributes
+
+
+          //return a pokemon object with the extracted data
 
           return {
             name: Uppercase(pokemon.name),
@@ -117,6 +85,9 @@ function PokemonData():PokemonDataResult {
             moves: firstMoves,//this isnt getting passed properly.
             height: detailsData[index].height, 
             weight: detailsData[index].weight, 
+            id: detailsData[index].id,
+            is_baby:evolution.chain.is_baby,
+            color
           };
         });
 
@@ -143,7 +114,7 @@ function PokemonData():PokemonDataResult {
   };
 
 
-  return {pokemonData, loading, loadMore}; //Return an object with the data, loading state, and load more functionality
+  return {pokemonData, loading, loadMore}; //Return an object with the data, loading state, and load more function
 }
 
 export default PokemonData;
