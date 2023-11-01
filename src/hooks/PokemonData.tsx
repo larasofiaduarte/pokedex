@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { fetchPokemonList, fetchPokemonDetails, fetchPokemonMoves, fetchEvolutionChainURL, fetchEvolutions, fetchPokemonColor} from '../util/api';
+import { fetchPokemonList, fetchPokemonDetails, fetchPokemonMoves, fetchEvolutionChainURL, fetchEvolutions, fetchPokemonColor, fetchSpeciesData} from '../util/api';
 import {Pokemon} from './Interfaces';
+import axios from 'axios';
 
 
 export type PokemonDataResult = {
@@ -22,10 +23,12 @@ function PokemonData():PokemonDataResult {
   
   const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [limit, setLimit] = useState(100); // Display x amount of Pokemon
+  const [limit, setLimit] = useState(200); // Display x amount of Pokemon
   const baseUrl: string = 'https://pokeapi.co/api/v2/';
 
+  
 
+  // Function to make the API call
 
   useEffect(() => {
     setLoading(true);
@@ -46,13 +49,14 @@ function PokemonData():PokemonDataResult {
           //Fetch the evolution chain URL for the current Pokemon
           const evolutionChainURL:any = await fetchEvolutionChainURL(detailsData[index].species.url);
 
+          //species data for isBaby
+          const speciesData:any = await fetchSpeciesData(detailsData[index].species.url);
 
           //Fetch evolutions 
           const evolution:any = await fetchEvolutions(evolutionChainURL);
 
           //Fetch color using species endpoint
           const color:string = await fetchPokemonColor(`${baseUrl}pokemon-species/${id}/`);
-
 
           //Fetch moves 
           const moves = await fetchPokemonMoves(pokemon.url);
@@ -86,7 +90,7 @@ function PokemonData():PokemonDataResult {
             height: detailsData[index].height, 
             weight: detailsData[index].weight, 
             id: detailsData[index].id,
-            is_baby:evolution.chain.is_baby,
+            isBaby:speciesData.is_baby,
             color
           };
         });

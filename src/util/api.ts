@@ -43,11 +43,16 @@ export async function fetchPokemonSpeciesData(pokemonSpeciesUrl: string) {
   return response.json();
 };
 
+export async function fetchSpeciesData(pokemonSpeciesUrl: string): Promise<number> {
+  const speciesData = await fetchPokemonSpeciesData(pokemonSpeciesUrl);
+  
+  return speciesData;
+}
 
 //fetch correct evolution-chain endpoint depending on species
 export async function fetchEvolutionChainURL(pokemonSpeciesUrl: string): Promise<number> {
   const speciesData = await fetchPokemonSpeciesData(pokemonSpeciesUrl);
-
+  
   // Get the evolution chain URL from the species data
   const evolutionChainURL = speciesData.evolution_chain.url;
 

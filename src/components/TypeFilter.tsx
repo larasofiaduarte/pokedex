@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { types } from '../hooks/TypesData';
+import styles from '../styles/styles.scss'
 
 const customStyles = {
   option: (provided: any, state: any) => ({
@@ -9,7 +10,7 @@ const customStyles = {
   }),
 };
 
-const Sidebar = ({ onSelect }: any) => {
+const TypeFilter = ({ onSelect }: any) => {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
   const handleSelect = (selectedOptions: any) => {
@@ -20,18 +21,23 @@ const Sidebar = ({ onSelect }: any) => {
 
 
   return (
-    <Select
-      value={types.filter((type) => selectedTypes.includes(type.value))}
-      defaultValue={[]}
-      isMulti
-      name="colors"
-      options={types}
-      className="basic-multi-select"
-      classNamePrefix="select"
-      styles={customStyles}
-      onChange={handleSelect}
-    />
+    <>
+      <Select
+        value={types.filter((type) => selectedTypes.includes(type.value))}
+        defaultValue={[]}
+        placeholder="Types" 
+        isMulti
+        name="types"
+        options={types}
+        className="multiselect"
+        classNamePrefix="select"
+        styles={customStyles}
+        onChange={handleSelect}
+      />
+      
+    </>
+    
   );
 };
 
-export default Sidebar;
+export default TypeFilter;

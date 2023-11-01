@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
-import {Form, InputGroup} from 'react-bootstrap'
-import SearchBox from './SearchBox';
-
+import Details from './Details';
+import {Link, Route, Routes} from 'react-router-dom';
 
 
 const ListView = (props:any) => {
@@ -37,7 +36,9 @@ const ListView = (props:any) => {
                         <TableCell>
                         <img src={pokemon.picture} alt={pokemon.name} style={{ width: '100px' }} />
                         </TableCell>
-                        <TableCell sx={{fontWeight:'bold', fontSize:'1em'}}>{pokemon.name}</TableCell>
+                        <TableCell sx={{fontWeight:'bold', fontSize:'1em'}}>
+                            <Link to={`/pokemon/${pokemon.name}`}>{pokemon.name}</Link>
+                        </TableCell>
                         <TableCell>
                         {pokemon.evolutions.map((evolutions:any, index:number) => (
                             <div key={index}>{evolutions}</div>
@@ -52,6 +53,11 @@ const ListView = (props:any) => {
                 </TableBody>
             </Table>
         </TableContainer>
+        <Routes>
+            <Route path="/details" element={<Details></Details>}>
+
+            </Route>
+        </Routes>
         </>
     )
 }
