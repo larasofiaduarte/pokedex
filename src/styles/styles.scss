@@ -1,11 +1,12 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  margin: 0;
   text-align: center;
 }
 
-
+html{
+  width:100vw;
+}
 .card {
   padding: 2em;
 }
@@ -49,11 +50,13 @@
 
 .container{
   display:flex;
+  padding:2em;
 }
 
-.filters-btn{
-  height:3em;
+.searchContainer{
+  padding-right:0.5em;
 }
+
 
 .textfield{
   background-color:rgba(255, 255, 255, 0.989);
@@ -65,11 +68,63 @@
   align-content:center;
 }
 
-.filtersCont{
-  display:flex;
-}
 
 
 .multiselect{
-  width:150px;
+  margin:2em;
+  &Color{
+    z-index:999;
+    width:150px;
+  }
+  &Types{
+    z-index:1000;
+    width:150px;
+  }
+}.filters {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transform: translateX(-110%);
+  overflow: hidden;
+  opacity: 0;
+  height:80vh;
+  border-radius:5px;
+  &Btn{
+    z-index:100;
+  }
+}
+.pokemonContainer{
+  width:100%;
+}
+
+.filters.visible {
+  transform: translateX(0);
+  opacity: 1; /* Set opacity to 1 to keep it visible */
+}
+
+.hidden {
+  transform: translateX(-110%); /* Move it out of the viewport */
+}
+
+.divider{
+  background-color:grey;
+}
+
+.filtersMenu{
+  margin-right:2em;
+}
+
+.detailsImg{
+  background-color:white;
+  border-radius:25px;
+  margin:5em;
+}
+
+.detailsCont{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.detailsInfo{
+  padding:1em;
 }

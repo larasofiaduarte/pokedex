@@ -17,7 +17,7 @@ const GridView = (props:any) => {
         {pokemonData.filter((pokemon:any)=>{
           return searchTerm.toLowerCase()=== '' ? pokemon : pokemon.name.toLowerCase().includes(searchTerm)
         }).map((pokemon: any, index: number) => ( // Include 'index' in the parameters
-          <Grid item  key={index}>
+          <Grid item lg={3} key={index}>
             <MediaCard img={pokemon.picture} title={pokemon.name} types={pokemon.types}/>
           </Grid>
         ))}

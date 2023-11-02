@@ -29,7 +29,7 @@ const ColorFilter = ({ onSelect }: any) => {
       name="colors"
       placeholder="Color" 
       options={colors}
-      className="multiselect"
+      className="multiselectColor"
       classNamePrefix="select"
       styles={customStyles}
       onChange={handleColorSelect}

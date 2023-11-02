@@ -4,7 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {Link} from 'react-router-dom'
 import '../styles/styles.scss'; 
+
 
 interface MediaCardProps {
   img: string; 
@@ -33,7 +35,9 @@ export default function MediaCard({img, title, types}:MediaCardProps) {
           </Typography>
         </CardContent>
         <CardActions sx={{display:'flex'}} className="center-card">
-          <Button size="small">Learn More</Button>
+          <Link to={`/pokemon/${title}`}>
+            <button>Learn More</button>
+          </Link>
         </CardActions>
       </Card>
     );

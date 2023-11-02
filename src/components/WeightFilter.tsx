@@ -19,9 +19,10 @@ function WeightFilter({ onMinWeightChange, onMaxWeightChange }:any) {
       };
 
     return (
-        <div style={{ display: 'flex' }}>
+        <div>
         <TextField
             sx={{
+                padding:1,
                 width:130,
                 "& .MuiInputBase-root":{
                     height:38,
@@ -37,6 +38,7 @@ function WeightFilter({ onMinWeightChange, onMaxWeightChange }:any) {
         />
         <TextField
             sx={{
+                padding:1,
                 width:130,
                 textAlign:'center',
                 fontSize:'10',

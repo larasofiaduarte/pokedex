@@ -7,6 +7,7 @@ const customStyles = {
   option: (provided: any, state: any) => ({
     ...provided,
     color: 'black',
+    zIndex:10,
   }),
 };
 
@@ -29,7 +30,7 @@ const TypeFilter = ({ onSelect }: any) => {
         isMulti
         name="types"
         options={types}
-        className="multiselect"
+        className="multiselectTypes"
         classNamePrefix="select"
         styles={customStyles}
         onChange={handleSelect}

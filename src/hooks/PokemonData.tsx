@@ -23,7 +23,7 @@ function PokemonData():PokemonDataResult {
   
   const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [limit, setLimit] = useState(200); // Display x amount of Pokemon
+  const [limit, setLimit] = useState(180); // Display x amount of Pokemon
   const baseUrl: string = 'https://pokeapi.co/api/v2/';
 
   
@@ -114,7 +114,7 @@ function PokemonData():PokemonDataResult {
   //Function to load more pokemon
 
   const loadMore = () => {
-    setLimit(limit + 20);
+    setLimit(limit + 50);
   };
 
 

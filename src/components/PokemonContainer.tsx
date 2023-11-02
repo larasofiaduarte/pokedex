@@ -3,19 +3,24 @@ import PokemonData, {PokemonDataResult} from '../hooks/PokemonData';
 import ListView from './ListView';
 import GridView from './GridView';
 import CircularProgress from '@mui/material/CircularProgress';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import '../styles/styles.scss';
 import SearchBox from './SearchBox';
+import Details from './Details';
+
+
 
 //params=filters
 function PokemonContainer( {selectedTypes, selectedColor, isBabyChecked, maxWeight, minWeight}:any ) {
+  const location = useLocation();
+
    // Fetch data and manage state
   const {pokemonData, loading, loadMore}:PokemonDataResult = PokemonData();
   const [searchTerm, setSearchTerm] = useState(''); 
 
   //Stores search term into state
   const handleSearch = (term:string) => {
-    setSearchTerm(term);
+    setSearchTerm(term.toLowerCase());
   };
 
   //array of pokemons that match all filters
@@ -47,27 +52,42 @@ function PokemonContainer( {selectedTypes, selectedColor, isBabyChecked, maxWeig
   
 
   return (
-    <div>
+    <div className="pokemonContainer">
         {loading ? (
             <CircularProgress/>
         ) : (
         <>
-          <SearchBox onSearch={handleSearch} />
-          <div className="viewContainer">
-            <Link className="viewButton" to="/">List </Link>
-            <Link className="viewButton" to="/grid">Grid</Link>
-          </div>
-          <Routes>
-            <Route path="/" element={<ListView pokemonData={filteredData} searchTerm={searchTerm}/>}/>
-            <Route path="/grid" element={<GridView pokemonData={filteredData} searchTerm={searchTerm}/>}/>
-          </Routes>
-            
-          <button onClick={loadMore}>Load More</button>
-            
+        {/* render the SearchBox based on the route */}
+        <>
+          {location.pathname === '/' || location.pathname === '/list' ? (
+            <div className="searchContainer">
+              <SearchBox onSearch={handleSearch} />
+              <div className="viewContainer">
+                <Link to="/list">
+                  <button style={{margin:1}}>List</button>
+                </Link>
+                <Link to="/">
+                  <button style={{margin:1}}>Grid</button>
+                </Link>
+              </div>
+            </div>
+          ) : null}
         </>
-      )}
-    </div>
-  );
+
+        <Routes>
+          <Route path="/list" element={<ListView pokemonData={filteredData} searchTerm={searchTerm} />} />
+          <Route path="/" element={<GridView pokemonData={filteredData} searchTerm={searchTerm} />} />
+          <Route path="/pokemon/:name" element={<Details pokemonData={pokemonData} />} />
+        </Routes>
+        {location.pathname=== '/' || location.pathname==='/list' ? (
+            <button onClick={loadMore}>Load More</button>
+        ):null}
+        
+      </>
+    )}
+  </div>
+);
 }
+
 
 export default PokemonContainer;

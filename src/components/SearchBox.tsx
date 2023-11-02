@@ -14,13 +14,14 @@ const SearchBox = ({ onSearch }:any) => {
   };
 
   return (
-    <Form className="form">
+    <Form className="form" style={{margin:2}}>
       <InputGroup>
         <Form.Control
           className="search"
           placeholder="Search for a Pokemon..."
           value={search}
           onChange={handleSearch}
+          style={{backgroundColor:'white'}}
         />
       </InputGroup>
     </Form>
