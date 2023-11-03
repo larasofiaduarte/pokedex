@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
-import Details from './Details';
-import {Link, Route, Routes} from 'react-router-dom';
-import styles from '../styles/styles.scss'
+
+import {Link} from 'react-router-dom';
 
 
 const ListView = (props:any) => {

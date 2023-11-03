@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+
 import PokemonData, {PokemonDataResult} from '../hooks/PokemonData';
 import ListView from './ListView';
 import GridView from './GridView';
 import CircularProgress from '@mui/material/CircularProgress';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import '../styles/styles.scss';
-import SearchBox from './SearchBox';
 import Details from './Details';
 
 

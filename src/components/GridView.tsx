@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+
 import MediaCard from './Card';
-import SearchBox from './SearchBox';
 import { Grid, Container } from '@mui/material';
 import '../styles/styles.scss'
 

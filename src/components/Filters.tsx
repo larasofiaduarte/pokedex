@@ -1,15 +1,9 @@
-import React,{useState, useEffect} from 'react'
-import PokemonContainer from './PokemonContainer'
 import TypeFilter from './TypeFilter'
 import ColorFilter from './ColorFilter'
 import BabyFilter from './BabyFilter'
 import WeightFilter from './WeightFilter'
-import styles from '../styles/styles.scss'
-import TuneIcon from '@mui/icons-material/Tune';
 import {List, ListItem, Divider} from '@mui/material'
 import {useLocation} from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
-import { SafetyDividerSharp } from '@mui/icons-material'
 
 export default function Filters({
             selectedTypes,

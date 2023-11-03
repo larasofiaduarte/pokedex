@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import {colors} from '../hooks/ColorData';
-import styles from '../styles/styles.scss'
 
 const customStyles = {
   option: (provided: any, state: any) => ({

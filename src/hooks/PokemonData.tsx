@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchPokemonList, fetchPokemonDetails, fetchPokemonMoves, fetchEvolutionChainURL, fetchEvolutions, fetchPokemonColor, fetchSpeciesData} from '../util/api';
 import {Pokemon} from './Interfaces';
-import axios from 'axios';
 
 
 export type PokemonDataResult = {

@@ -1,10 +1,4 @@
 
-
-type PokemonType = {
-  value: string;
-  label: string;
-};
-
 export const types = [
     { value: 'normal', label: 'Normal' },
     { value: 'fire', label: '🔥Fire' },

@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import TextField from '@mui/material/TextField';
-import styles from '../styles/styles.scss'
 
 function WeightFilter({ onMinWeightChange, onMaxWeightChange }:any) {
     const [minWeight, setMinWeight] = useState(0);
