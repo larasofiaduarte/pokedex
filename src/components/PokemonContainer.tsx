@@ -11,20 +11,22 @@ import Details from './Details';
 
 
 //params=filters
-function PokemonContainer( {selectedTypes, selectedColor, isBabyChecked, maxWeight, minWeight}:any ) {
+function PokemonContainer( {selectedTypes, selectedColor, isBabyChecked, maxWeight, minWeight, handleSearch, searchTerm}:any ) {
   const location = useLocation();
 
    // Fetch data and manage state
   const {pokemonData, loading, loadMore}:PokemonDataResult = PokemonData();
-  const [searchTerm, setSearchTerm] = useState(''); 
 
-  //Stores search term into state
-  const handleSearch = (term:string) => {
-    setSearchTerm(term.toLowerCase());
-  };
-
+    console.log(searchTerm);
+  
   //array of pokemons that match all filters
   let filteredData = pokemonData;
+
+  if (searchTerm) {
+    filteredData = filteredData.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(searchTerm)
+    );
+  }
 
   //Stores pokemon that match the selected types into an array
   if (selectedTypes.length > 0) {
@@ -57,23 +59,6 @@ function PokemonContainer( {selectedTypes, selectedColor, isBabyChecked, maxWeig
             <CircularProgress/>
         ) : (
         <>
-        {/* render the SearchBox based on the route */}
-        <>
-          {location.pathname === '/' || location.pathname === '/list' ? (
-            <div className="searchContainer">
-              <SearchBox onSearch={handleSearch} />
-              <div className="viewContainer">
-                <Link to="/list">
-                  <button style={{margin:1}}>List</button>
-                </Link>
-                <Link to="/">
-                  <button style={{margin:1}}>Grid</button>
-                </Link>
-              </div>
-            </div>
-          ) : null}
-        </>
-
         <Routes>
           <Route path="/list" element={<ListView pokemonData={filteredData} searchTerm={searchTerm} />} />
           <Route path="/" element={<GridView pokemonData={filteredData} searchTerm={searchTerm} />} />

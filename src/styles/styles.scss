@@ -1,12 +1,19 @@
+
+
 #root {
   width: 100%;
   margin: 0;
   text-align: center;
+  
 }
 
 html{
   width:100vw;
+  overflow-x:hidden;
 }
+
+
+/*CARD*/
 .card {
   padding: 2em;
 }
@@ -18,48 +25,55 @@ html{
   text-align: center;
 }
 
+.cardCont{
+  transition: transform 0.3s; 
+  &:hover{
+    transform: scale(1.1);
+  }
+}
+
+/*SEARCH*/
+
 .form{
   display:flex;
   justify-content:right;
+  align-items:center;
 }
 
 .search{
-  height:3.5em;
+  height:4em;
   width: 20em;
   border-radius:25px;
   padding:0px 10px;
+  margin:2em;
 }
 
-.table{
-  margin-top:1em;
-  margin-bottom:1em;
+/*TABLE*/
+
+.pokemonContainer{
+  padding: 0 5em;
 }
+/*LIST GRID BTNS*/
 
 .viewContainer{
   display:flex;
-  justify-items: right;
-  justify-content: right;
+  justify-items: left;
+  justify-content: left;
+  align-items:center;
 }
 
 .viewButton{
   padding:0.5em 1.5em;
   border-radius:25px;
   background-color:#1a1a1a;
-  margin: 0em 0.5em;
+  margin: 1em 0.5em;
 }
 
-.container{
-  display:flex;
-  padding:2em;
-}
-
-.searchContainer{
-  padding-right:0.5em;
-}
+/*FILTERS*/
 
 
 .textfield{
-  background-color:rgba(255, 255, 255, 0.989);
+  background-color:#f3f3f3;
   border-radius:5px;
   height:2.4em;
   width:150px;
@@ -68,7 +82,48 @@ html{
   align-content:center;
 }
 
+.filtersearchCont{
+  display:flex;
+  max-width:100%;
+}
+.filtersCont{
+  display:flex;
+}
 
+.filterWeight{
+  width:300px !important;
+  display:flex;
+}
+.filters{
+  width:100%;
+  display:flex;
+  justify-items:left !important;
+  justify-content:left !important;
+  align-items:center;
+  padding:0;
+  margin:0;
+  
+  &Item{
+    padding:0 0 0 5 !important;
+    
+  }
+  &Btn{
+    display:flex;
+    align-items:center;
+  }
+  &Container{
+    display:flex;
+    align-items:center;
+    width:50em;
+    &--cont{
+      width:100%;
+    }
+  }
+
+}
+.filtersBtn{
+  display:flex;
+}
 
 .multiselect{
   margin:2em;
@@ -80,40 +135,22 @@ html{
     z-index:1000;
     width:150px;
   }
-}.filters {
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  transform: translateX(-110%);
-  overflow: hidden;
-  opacity: 0;
-  height:80vh;
-  border-radius:5px;
-  &Btn{
-    z-index:100;
-  }
-}
-.pokemonContainer{
-  width:100%;
-}
-
-.filters.visible {
-  transform: translateX(0);
-  opacity: 1; /* Set opacity to 1 to keep it visible */
 }
 
 .hidden {
-  transform: translateX(-110%); /* Move it out of the viewport */
+  opacity:0; /* Move it out of the viewport */
 }
 
-.divider{
-  background-color:grey;
+/*DETAILS PAGE*/
+.detailsCard{
+  background-color:#f3f3f3;
+  color:#1a1a1a;
+  border-radius:25px;
+  backdrop-filter:blur();
+  margin:1em;
 }
-
-.filtersMenu{
-  margin-right:2em;
-}
-
 .detailsImg{
-  background-color:white;
+  background-color:#f3f3f3;
   border-radius:25px;
   margin:5em;
 }
@@ -123,8 +160,75 @@ html{
   flex-direction:column;
   align-items:center;
   justify-content:center;
+  
 }
 
 .detailsInfo{
   padding:1em;
+  
+}
+.btnBack{
+  margin-left:2em;
+  margin-top:2em;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%); /* Start off the screen to the left */
+  }
+  to {
+    transform: translateX(0); /* Slide in to the normal position */
+  }
+}
+
+
+@media screen and (max-width: 768px){
+  .filters{
+    flex-direction:column;
+    &Container{
+      width:auto !important;
+    }
+  }
+  .filtersItem{
+    flex-direction:column;
+    align-items:left;
+    margin:0;
+    padding:0;
+  }
+  .filterWeight{
+    flex-direction:column;
+    align-items:center;
+    
+  }
+  .css-1kg5os5-MuiListItem-root{
+    padding:0;
+  }
+  .filtersBtn{
+    display:flex;
+    justify-content:center;
+  }
+  .viewContainer{
+    justify-content: center;
+  }
+  .form{
+    margin:0;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 1120px){
+ 
+  .filtersearchCont{
+    display:block;
+  }
+  .filtersCont{
+    display:block;
+  }
+}
+
+@media screen and (max-width: 1260px){
+  .search{
+    width:15em;
+    height:4em;
+  }
+  
 }

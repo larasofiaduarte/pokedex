@@ -19,11 +19,11 @@ function WeightFilter({ onMinWeightChange, onMaxWeightChange }:any) {
       };
 
     return (
-        <div>
+        <div style={{display:'flex'}} className="filterWeight">
         <TextField
             sx={{
                 padding:1,
-                width:130,
+                width:150,
                 "& .MuiInputBase-root":{
                     height:38,
                     backgroundColor:'white',
@@ -35,11 +35,12 @@ function WeightFilter({ onMinWeightChange, onMaxWeightChange }:any) {
             label="Min Weight"
             type="number"
             onChange={handleMinWeightChange}
+            className="filterWeightTxt"
         />
         <TextField
             sx={{
                 padding:1,
-                width:130,
+                width:150,
                 textAlign:'center',
                 fontSize:'10',
                 "& .MuiInputBase-root":{
@@ -51,6 +52,7 @@ function WeightFilter({ onMinWeightChange, onMaxWeightChange }:any) {
             label="Max Weight"
             type="number"
             onChange={handleMaxWeightChange}
+            className="filterWeightTxt"
         />
         </div>
     );

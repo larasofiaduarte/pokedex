@@ -21,7 +21,7 @@ const SearchBox = ({ onSearch }:any) => {
           placeholder="Search for a Pokemon..."
           value={search}
           onChange={handleSearch}
-          style={{backgroundColor:'white'}}
+          style={{backgroundColor:'white', color:'black'}}
         />
       </InputGroup>
     </Form>

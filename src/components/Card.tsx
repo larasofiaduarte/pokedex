@@ -17,8 +17,9 @@ interface MediaCardProps {
 
 export default function MediaCard({img, title, types}:MediaCardProps) {
     return (
-      <Card sx={{ maxWidth: 345, margin: 2, padding:2}}>
-        <div>
+      <div className="cardCont">
+      <Card sx={{ maxWidth: 345, margin: 2, padding:2, boxShadow:'0 10px 10px rgba(5, 5, 5, 0.5)'}}>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
           <CardMedia
           sx={{ height: 200, width: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           image={img}
@@ -40,5 +41,6 @@ export default function MediaCard({img, title, types}:MediaCardProps) {
           </Link>
         </CardActions>
       </Card>
+      </div>
     );
 }
