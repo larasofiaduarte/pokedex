@@ -1,7 +1,5 @@
 import axios from 'axios';
-import {useEffect, useState} from 'react';
 
-const baseUrl: string = 'https://pokeapi.co/api/v2'; 
 
 //fetch pokemon data
 
