@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
 
 import {Link} from 'react-router-dom';
@@ -6,12 +6,10 @@ import {Link} from 'react-router-dom';
 
 const ListView = (props:any) => {
 
+    //tslint:disable-next-line
     const { pokemonData } = props;
     const searchTerm = props.searchTerm;
-
-    const [search, setSearch] = useState('');
-
-
+    console.log(pokemonData)
     return (
         <>
 

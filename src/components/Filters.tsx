@@ -2,19 +2,14 @@ import TypeFilter from './TypeFilter'
 import ColorFilter from './ColorFilter'
 import BabyFilter from './BabyFilter'
 import WeightFilter from './WeightFilter'
-import {List, ListItem, Divider} from '@mui/material'
+import {List, ListItem} from '@mui/material'
 import {useLocation} from 'react-router-dom';
 
 export default function Filters({
-            selectedTypes,
             handleSelect,
-            selectedColor,
             handleColorSelect,
-            isBabyChecked,
             handleBabyCheckboxChange,
-            minWeight,
             handleMinWeight,
-            maxWeight,
             handleMaxWeight,
             filtersVisible,
   }:any) {

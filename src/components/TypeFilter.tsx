@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { types } from '../hooks/TypesData';
 
 const customStyles = {
-  option: (provided: any, state: any) => ({
+  option: (provided: any) => ({
     ...provided,
     color: 'black',
     zIndex:10,

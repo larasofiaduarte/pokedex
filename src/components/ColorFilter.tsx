@@ -3,7 +3,7 @@ import Select from 'react-select';
 import {colors} from '../hooks/ColorData';
 
 const customStyles = {
-  option: (provided: any, state: any) => ({
+  option: (provided: any) => ({
     ...provided,
     color: 'black',
   }),
@@ -12,7 +12,7 @@ const customStyles = {
 
 const ColorFilter = ({ onSelect }: any) => {
     const [selectedColor, setSelectedColor] = useState<string | null>(null);
-    const [isClearable, setIsClearable] = useState(true);
+    const [isClearable ] = useState(true);
 
   
     const handleColorSelect = (selectedOption: any) => {

@@ -1,6 +1,6 @@
 
 import MediaCard from './Card';
-import { Grid, Container } from '@mui/material';
+import { Grid } from '@mui/material';
 import '../styles/styles.scss'
 
 const GridView = (props:any) => {

@@ -2,8 +2,12 @@ import {useState} from 'react';
 import TextField from '@mui/material/TextField';
 
 function WeightFilter({ onMinWeightChange, onMaxWeightChange }:any) {
+
+    //tslint:disable-next-line
     const [minWeight, setMinWeight] = useState(0);
     const [maxWeight, setMaxWeight] = useState(1999);
+
+    console.log(minWeight,maxWeight);
 
     const handleMinWeightChange = (event: any) => {
         const minWeight = event.target.value;

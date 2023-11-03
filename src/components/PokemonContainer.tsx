@@ -10,7 +10,7 @@ import Details from './Details';
 
 
 //params=filters
-function PokemonContainer( {selectedTypes, selectedColor, isBabyChecked, maxWeight, minWeight, handleSearch, searchTerm}:any ) {
+function PokemonContainer( {selectedTypes, selectedColor, isBabyChecked, maxWeight, minWeight, searchTerm}:any ) {
   const location = useLocation();
 
    // Fetch data and manage state
