@@ -6,7 +6,7 @@ function MyAppBar() {
   return (
     <AppBar position="static" style={{backgroundColor:'#080a12'}}>
         <Toolbar sx={{display:'flex', justifyContent:'space-between'}}>
-            <img src="C:\Users\duart\OneDrive\Desktop\pokedex\pokedex\src\assets\logo.png" alt="Logo" style={{ width: '150px', height: 'auto' }}/>
+            <img src="/src/assets/logo.png" alt="Logo" style={{ width: '150px', height: 'auto' }}/>
         </Toolbar>
     </AppBar>
   );
