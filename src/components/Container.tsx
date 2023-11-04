@@ -58,27 +58,28 @@ export default function Container() {
       {location.pathname === '/' || location.pathname==='/list' ? (
       <div className="filtersearchCont">
         <SearchBox onSearch={handleSearch} />
-        <div className="filtersCont">
-          <div className="filtersBtn">
-            <button onClick={toggleFilters} className="filtersBtn">
-              <TuneIcon></TuneIcon>
-              <div>Filters</div>
-            </button>
-          </div>
-          <Filters
-              selectedTypes={selectedTypes}
-              handleSelect={handleSelect}
-              selectedColor={selectedColor}
-              handleColorSelect={handleColorSelect}
-              isBabyChecked={isBabyChecked}
-              handleBabyCheckboxChange={handleBabyCheckboxChange}
-              minWeight={minWeight}
-              handleMinWeight={handleMinWeight}
-              maxWeight={maxWeight}
-              handleMaxWeight={handleMaxWeight}
-              filtersVisible={filtersVisible}
-          />
-        </div>
+        <div className="filtersviewCont">
+              <div className="filtersCont">
+                <div className="filtersBtn">
+                  <button onClick={toggleFilters} className="filtersBtn">
+                    <TuneIcon></TuneIcon>
+                    <div>Filters</div>
+                  </button>
+                </div>
+                <Filters
+                    selectedTypes={selectedTypes}
+                    handleSelect={handleSelect}
+                    selectedColor={selectedColor}
+                    handleColorSelect={handleColorSelect}
+                    isBabyChecked={isBabyChecked}
+                    handleBabyCheckboxChange={handleBabyCheckboxChange}
+                    minWeight={minWeight}
+                    handleMinWeight={handleMinWeight}
+                    maxWeight={maxWeight}
+                    handleMaxWeight={handleMaxWeight}
+                    filtersVisible={filtersVisible}
+                />
+              </div>
               <div className="viewContainer">
                 <Link to="/list">
                   <button style={{margin:20}}>List</button>
@@ -87,7 +88,7 @@ export default function Container() {
                   <button style={{margin:20}}>Grid</button>
                 </Link>
               </div>
-        
+        </div>
       </div>
           ):null}
       <PokemonContainer onSearch={handleSearch} searchTerm={searchTerm} selectedTypes={selectedTypes} selectedColor={selectedColor} isBabyChecked={isBabyChecked} minWeight={minWeight} maxWeight={maxWeight}></PokemonContainer>

@@ -36,7 +36,6 @@ html{
 
 .form{
   display:flex;
-  justify-content:right;
   align-items:center;
 }
 
@@ -52,6 +51,7 @@ html{
 
 .pokemonContainer{
   padding: 0 5em;
+  max-width:100%;
 }
 /*LIST GRID BTNS*/
 
@@ -118,6 +118,9 @@ html{
     &--cont{
       width:100%;
     }
+  }
+  &viewCont{
+    display:flex;
   }
 
 }
@@ -223,12 +226,29 @@ html{
   .filtersCont{
     display:block;
   }
+  .filtersviewCont{
+    display:block;
+  }
 }
 
 @media screen and (max-width: 1260px){
   .search{
     width:15em;
     height:4em;
+  }
+  
+}
+
+@media screen and (max-width: 1460px){
+  .filtersearchCont{
+    display:block;
+  }
+  .filtersCont{
+    padding-left:1em;
+  }
+  .form{
+    display:flex;
+    justify-items:left;
   }
   
 }
